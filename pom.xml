@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <uberjar.name>cassandra-driver-tests</uberjar.name>
         <jmh.version>1.21</jmh.version>
+        <netty.version>4.0.56.Final</netty.version>
     </properties>
 
     <dependencies>
@@ -20,6 +21,13 @@
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
             <version>3.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-epoll</artifactId>
+            <classifier>linux-x86_64</classifier>
+            <version>${netty.version}</version>
         </dependency>
 
         <dependency>

@@ -46,7 +46,7 @@ public class BenchmarkCommon {
                     .withAuthProvider(username != null ? new PlainTextAuthProvider(username, password) : AuthProvider.NONE)
                     .withQueryOptions(new QueryOptions().setConsistencyLevel(ConsistencyLevel.ONE))
                     .build();
-            session = cluster.newSession();
+            session = cluster.connect(System.getProperty("keyspace", "test_driver"));
             doSetupInternal(session);
         }
 
