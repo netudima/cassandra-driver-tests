@@ -26,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5, timeUnit = TimeUnit.SECONDS, time = 60)
 @Fork(2)
 @Threads(value = 8)
-@BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.SECONDS)
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class BenchmarkCommon {
 
     @State(Scope.Benchmark)
@@ -35,6 +35,7 @@ public class BenchmarkCommon {
         public String contactPoint = System.getProperty("host", "localhost");
         public String username = System.getProperty("username");
         public String password = System.getProperty("password");
+        public String keyspace = System.getProperty("keyspace", "test_driver");
 
         public Cluster cluster;
         public Session session;
@@ -46,7 +47,7 @@ public class BenchmarkCommon {
                     .withAuthProvider(username != null ? new PlainTextAuthProvider(username, password) : AuthProvider.NONE)
                     .withQueryOptions(new QueryOptions().setConsistencyLevel(ConsistencyLevel.ONE))
                     .build();
-            session = cluster.connect(System.getProperty("keyspace", "test_driver"));
+            session = cluster.connect(keyspace);
             doSetupInternal(session);
         }
 

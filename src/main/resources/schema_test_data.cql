@@ -22,6 +22,9 @@ CREATE TABLE test_driver.test_table_value8 (
     PRIMARY KEY (part_key, clust_key)
 );
 
+ALTER TABLE test_driver.test_table_value8 WITH read_repair_chance = 0 AND dclocal_read_repair_chance = 0;
+ALTER TABLE test_driver.test_table WITH read_repair_chance = 0 AND dclocal_read_repair_chance = 0;
+
 insert into test_driver.test_table_value8 (part_key, clust_key, value1, value2, value3, value4, value5, value6, value7, value8) values (
 'part_key1', 'clust_key1', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6', 'value7', 'value8');
 insert into test_driver.test_table_value8 (part_key, clust_key, value1, value2, value3, value4, value5, value6, value7, value8) values (
